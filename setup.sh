@@ -13,16 +13,16 @@ create_service() {
 
     sudo mkdir -p /etc/$SERVICE_NAME
     sudo mkdir -p /var/log/$SERVICE_NAME
-    mkdir -p ~/multi-nginx/generated/$SERVICE_NAME   # ← добавь
+    mkdir -p ~/multi-nginx/generated/$SERVICE_NAME  
 
     export SERVICE_NAME
     export PORT
 
     envsubst < templates/nginx.conf.template | sudo tee /etc/$SERVICE_NAME/nginx.conf > /dev/null
-    envsubst < templates/nginx.conf.template > ~/multi-nginx/generated/$SERVICE_NAME/nginx.conf  # ← добавь
+    envsubst < templates/nginx.conf.template > ~/multi-nginx/generated/$SERVICE_NAME/nginx.conf 
 
     envsubst < templates/nginx.service.template | sudo tee /etc/systemd/system/$SERVICE_NAME.service > /dev/null
-    envsubst < templates/nginx.service.template > ~/multi-nginx/generated/$SERVICE_NAME/$SERVICE_NAME.service  # ← добавь
+    envsubst < templates/nginx.service.template > ~/multi-nginx/generated/$SERVICE_NAME/$SERVICE_NAME.service 
 
     sudo systemctl daemon-reload
     sudo systemctl enable $SERVICE_NAME
