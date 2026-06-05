@@ -1,0 +1,22 @@
+daemon on;
+
+worker_processes auto;
+
+pid /run/${SERVICE_NAME}.pid;
+
+events {
+    worker_connections 1024;
+}
+
+http {
+    access_log /var/log/${SERVICE_NAME}/access.log;
+    error_log /var/log/${SERVICE_NAME}/error.log;
+
+    server {
+        listen ${PORT};
+
+        location / {
+            return 200 "Hello from ${SERVICE_NAME} on port ${PORT}\n";
+        }
+    }
+}
